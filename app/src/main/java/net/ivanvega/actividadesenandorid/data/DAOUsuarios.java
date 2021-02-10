@@ -36,26 +36,19 @@ public class DAOUsuarios {
     public boolean delete (long id){
 
         return ad.delete(DB.TABLE_USUARIOS_NAME,
-                "_id=? and status=?",
-                new String[]{String.valueOf(id), "VI"}) >  0;
+                "_id=?",
+                new String[]{String.valueOf(id)}) >  0;
 
     }
 
-    public boolean update(Usuario usuario){
-
-        ContentValues cv = new ContentValues();
-
-        cv.put(DB.COLUMS_TABLEUSUARIOS[1], usuario.getNombre());
-        cv.put(DB.COLUMS_TABLEUSUARIOS[2], usuario.getEmail());
-        cv.put(DB.COLUMS_TABLEUSUARIOS[3], usuario.getContraseña());
-        cv.put(DB.COLUMS_TABLEUSUARIOS[4], usuario.getTelefono());
+    public boolean update(ContentValues cv){
 
         return   ad.update(
                 DB.TABLE_USUARIOS_NAME,
                 cv ,
                 "_id=?",
-                new String[]{ String.valueOf( usuario.getID())}
-                )   > 0;
+                new String[]{ String.valueOf( cv.get("_id"))}
+        )   > 0;
     }
 
     public List<Usuario> getAll(){

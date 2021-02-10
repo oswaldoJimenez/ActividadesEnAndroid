@@ -125,9 +125,9 @@ public class MiProveedorContenido extends ContentProvider {
             case 1:
                 break;
             case 2:
-                    result =
-                            (daoUsuarios.delete
-                                        (Long.parseLong( uri.getLastPathSegment()))) ? 1:0;
+                result =
+                        (daoUsuarios.delete
+                                (Long.parseLong( uri.getLastPathSegment()))) ? 1:0;
                 break;
         }
 
@@ -136,6 +136,15 @@ public class MiProveedorContenido extends ContentProvider {
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues contentValues, @Nullable String s, @Nullable String[] strings) {
-        return 0;
+        int result=0;
+        switch (uriMatcher.match(uri)){
+            case 1:
+                result =
+                        (daoUsuarios.update(contentValues) ? 1:0);
+                break;
+        }
+
+        return result;
+
     }
 }
